@@ -1,0 +1,11 @@
+chapter_id,title,order,class_hours,parent_id
+CH01,大数据处理架构Hadoop,1,6,
+CH02,Hadoop文件系统HDFS,2,5,CH01
+CH03,YARN资源调度框架,3,5,CH01
+CH04,MapReduce编程模型,4,5,CH01
+CH05,Hive数据仓库技术,5,3,
+CH06,HBase分布式数据库,6,3,
+CH07,Spark核心架构,7,6,
+CH08,RDD编程基础,8,5,CH07
+CH09,Spark SQL与DataFrame,9,5,CH07
+CH10,Spark Streaming流计算,10,5,CH07

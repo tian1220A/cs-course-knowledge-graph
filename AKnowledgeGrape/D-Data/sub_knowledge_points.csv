@@ -1,0 +1,246 @@
+sub_kp_id,kp_id,title,description,bloom_level,dependency_sub_kp,class_hours,chapter_id,syllabus_mentions
+SUB0101,KP0101,Hadoop版本演进路线,分析Hadoop 1.x到3.x的核心架构差异与兼容性,1,,6,CH01,4
+SUB0102,KP0101,核心组件交互模型,图解HDFS/MapReduce/YARN的协作流程与通信协议,1,SUB0101,6,CH01,5
+SUB0103,KP0101,NameNode元数据管理机制,详解fsimage与edits日志的合并原理与冷启动流程,2,SUB0102,6,CH01,3
+SUB0104,KP0101,伪分布式环境搭建实践,在Linux系统上完成Hadoop基础集群配置与基础功能验证,2,SUB0103,6,CH01,4
+SUB0105,KP0101,生态工具全景图,整理Hive/HBase/Spark等工具在Hadoop生态中的定位,3,SUB0104,6,CH01,4
+SUB0106,KP0102,数据写入流水线机制,分步骤解析客户端写入HDFS时的流水线创建与ACK确认逻辑,2,,6,CH01,2
+SUB0107,KP0102,分块与副本放置策略,研究128MB分块原则及机架感知算法的实现细节,3,SUB0106,6,CH01,2
+SUB0108,KP0102,短路读取优化技术,通过Short-Circuit Local Reads提升本地数据读取效率,3,SUB0107,6,CH01,4
+SUB0109,KP0102,HA架构中ZKFC故障切换,分析ZooKeeper在NameNode高可用方案中的选主与状态同步机制,4,SUB0108,6,CH01,3
+SUB0110,KP0102,跨集群数据迁移工具对比,实操DistCp与Hadoop Archive在不同场景下的性能差异,4,SUB0109,6,CH01,3
+SUB0111,KP0103,WordCount案例实现,手写Java版MapReduce词频统计程序并解析执行日志,3,,6,CH01,1
+SUB0112,KP0103,Combiner优化实战,在Shuffle阶段添加Combiner减少网络传输开销,3,SUB0111,6,CH01,2
+SUB0113,KP0103,自定义InputFormat开发,继承FileInputFormat实现多类型文件合并读取,4,SUB0112,6,CH01,1
+SUB0114,KP0103,链式作业调度实践,使用JobControl管理多个存在依赖关系的MapReduce作业,4,SUB0113,6,CH01,2
+SUB0115,KP0103,YARN资源参数调优,调整memory/vcores参数解决Container分配失败问题,5,SUB0114,6,CH01,2
+SUB0116,KP0104,三层调度架构解析,图解ResourceManager/NodeManager/ApplicationMaster的协作流程,4,,6,CH01,3
+SUB0117,KP0104,Capacity调度器配置实战,通过capacity-scheduler.xml实现多租户资源隔离,4,SUB0116,6,CH01,3
+SUB0118,KP0104,资源抢占策略分析,研究yarn.scheduler.capacity.preemption对集群吞吐量的影响,5,SUB0117,6,CH01,2
+SUB0119,KP0104,NodeManager心跳超时诊断,通过RM日志与NM监控数据定位节点失联根本原因,5,SUB0118,6,CH01,1
+SUB0120,KP0104,REST API监控开发,调用YARN Web Services接口实时获取集群资源利用率,5,,6,CH01,1
+SUB0121,KP0105,Flume多节点日志采集,配置exec/taildir源端实现实时日志抓取,2,,6,CH01,3
+SUB0122,KP0105,Hive与HBase场景矩阵,从数据模型/延迟/吞吐量等维度对比工具适用边界,4,,6,CH01,1
+SUB0123,KP0105,Spark与MapReduce引擎差异,基于DAG模型对比两种框架在迭代计算中的性能表现,4,SUB0122,6,CH01,1
+SUB0124,KP0105,存储格式选型评估,从压缩率/查询性能/模式演化等维度对比ORC与Parquet,5,SUB0123,6,CH01,1
+SUB0125,KP0105,YARN与Kubernetes调度器对比,分析两者在混合负载场景下的扩展性与隔离性差异,5,SUB0124,6,CH01,2
+SUB0201,KP0201,数据块写入Pipeline机制,图解客户端→DataNode链式写入流程与ACK验证逻辑,3,,5,CH02,4
+SUB0202,KP0201,机架感知策略优化实验,修改机架拓扑配置并测试跨机架写入性能差异,3,SUB0201,5,CH02,1
+SUB0203,KP0201,数据块读取容错机制,模拟DataNode故障并验证客户端自动重试策略,4,SUB0202,5,CH02,2
+SUB0204,KP0201,小文件合并存储方案,设计HAR文件合并策略并分析存储效率提升,4,SUB0203,5,CH02,1
+SUB0205,KP0201,异构存储分块策略对比,对比128MB/256MB块大小对MapReduce任务的影响,4,SUB0204,5,CH02,1
+SUB0206,KP0202,QJM共享存储配置实践,部署JournalNode集群并验证EditLog同步一致性,4,,5,CH02,1
+SUB0207,KP0202,ZKFC故障切换触发条件,测试网络隔离场景下Active→Standby切换阈值,4,SUB0206,5,CH02,3
+SUB0208,KP0202,脑裂场景模拟与恢复,通过kill -9强制杀死Active NN并观察元数据一致性,5,SUB0207,5,CH02,3
+SUB0209,KP0202,HA监控指标采集方案,集成Prometheus采集NN GC时间与RPC延迟指标,5,SUB0208,5,CH02,3
+SUB0210,KP0202,跨机房HA架构设计,设计异地双活NameNode的容灾方案,5,SUB0209,5,CH02,3
+SUB0211,KP0203,副本放置策略对比实验,修改默认副本策略（如跨机架优先）并测试读写性能,4,,5,CH02,1
+SUB0212,KP0203,数据损坏检测与修复,使用hdfs fsck扫描并触发副本自动重建,4,SUB0211,5,CH02,2
+SUB0213,KP0203,纠删码存储开销模型,"计算RS(6,3)编码的存储效率与恢复成本",5,SUB0212,5,CH02,1
+SUB0214,KP0203,网络拓扑容错模拟,断开机架交换机链路后验证数据可访问性,5,SUB0213,5,CH02,3
+SUB0215,KP0203,多副本一致性验证工具,开发脚本检查所有副本的CRC32校验和一致性,5,SUB0214,5,CH02,1
+SUB0216,KP0204,Namespace独立资源池管理,为不同业务线分配独立的BlockPool并限制存储配额,5,,5,CH02,1
+SUB0217,KP0204,联邦集群扩容仿真实验,动态添加Namespace并验证集群扩展性,5,SUB0216,5,CH02,1
+SUB0218,KP0204,跨Namespace数据迁移工具,基于DistCp开发元数据与块数据同步脚本,5,SUB0217,5,CH02,2
+SUB0219,KP0204,联邦架构成本效益分析,对比联邦与单Namespace架构的硬件利用率与运维复杂度,5,SUB0218,5,CH02,1
+SUB0220,KP0204,联邦与对象存储集成方案,评估HDFS联邦与S3兼容存储的混合部署可行性,5,SUB0219,5,CH02,1
+SUB0221,KP0205,基于S3A的混合存储方案,配置HDFS←→AWS S3透明数据访问层,5,,5,CH02,1
+SUB0222,KP0205,冷热数据分层存储策略,设计自动化策略将冷数据迁移至S3 Glacier,5,SUB0221,5,CH02,3
+SUB0223,KP0205,云原生访问加速优化,利用CDN缓存热点HDFS数据并测试延迟优化效果,5,SUB0222,5,CH02,3
+SUB0224,KP0205,跨云存储数据同步工具,开发多云之间HDFS数据同步框架（AWS S3→阿里云OSS）,5,SUB0223,5,CH02,2
+SUB0225,KP0205,存储成本监控看板开发,集成Cost Explorer API实现HDFS与云存储的联合成本分析,5,SUB0224,5,CH02,1
+SUB0301,KP0301,核心数据模型定义,解释行键（RowKey）、列族（Column Family）、时间戳的三元组结构,1,,5,CH03,1
+SUB0302,KP0301,物理存储格式解析,分析HFile的块索引、布隆过滤器、数据块编码结构,1,SUB0301,5,CH03,4
+SUB0303,KP0301,元数据表（hbase:meta）管理,描述Region位置、状态信息在元数据表中的存储规则,2,SUB0302,5,CH03,4
+SUB0304,KP0301,与RDBMS存储结构对比,对比HBase的LSM-Tree与MySQL的B+树在写入/查询场景的差异,2,SUB0303,5,CH03,2
+SUB0305,KP0301,MemStore与BlockCache配置,内存存储组件的作用及参数调优方法（如hbase.hregion.memstore.flush.size）,3,SUB0304,5,CH03,1
+SUB0306,KP0302,Region分裂触发条件,解释hbase.hregion.max.filesize参数与数据量阈值的关系,2,,5,CH03,3
+SUB0307,KP0302,预分裂（Pre-splitting）设计,根据业务场景设计初始Region划分策略（如HexStringSplit）,3,SUB0306,5,CH03,4
+SUB0308,KP0302,负载均衡算法实现,分析StochasticLoadBalancer的权重计算逻辑（Region数量/大小/请求量）,3,SUB0307,5,CH03,2
+SUB0309,KP0302,热点Region手动迁移操作,通过HBase Shell或API将指定Region转移到空闲RegionServer,4,SUB0308,5,CH03,3
+SUB0310,KP0302,分裂过程性能监控,通过HBase Metrics监控Region分裂时的吞吐量下降与恢复时间,4,SUB0309,5,CH03,1
+SUB0311,KP0303,协处理器（Coprocessor）原理,实现自定义Observer监听数据变更并更新索引表,3,,5,CH03,4
+SUB0312,KP0303,全局索引与本地索引差异,对比Phoenix全局索引与HBase本地索引的写入性能/查询效率,3,SUB0311,5,CH03,2
+SUB0313,KP0303,ES集成方案性能测试,通过HBase+Elasticsearch实现多条件查询，对比QPS与延迟,4,SUB0312,5,CH03,3
+SUB0314,KP0303,异步索引更新机制设计,基于Kafka队列实现索引更新与数据写入的解耦,4,SUB0313,5,CH03,1
+SUB0315,KP0303,索引一致性验证工具,开发脚本对比主表与索引表的数据一致性（如缺失率/错误率统计）,5,SUB0314,5,CH03,3
+SUB0316,KP0304,基准测试环境配置,统一硬件规格（CPU/内存/磁盘），部署HBase集群与MySQL集群,2,,5,CH03,3
+SUB0317,KP0304,OLTP场景性能指标采集,测试单行插入/更新/删除操作的TPS与P99延迟（使用YCSB压测工具）,3,SUB0316,5,CH03,2
+SUB0318,KP0304,复杂查询执行效率对比,对比JOIN操作在HBase（Phoenix）与MySQL中的执行计划与耗时,4,SUB0317,5,CH03,2
+SUB0319,KP0304,横向扩展能力测试,逐步增加节点，观察线性扩展能力与负载均衡效果,4,SUB0318,5,CH03,2
+SUB0320,KP0304,综合对比报告生成,生成可视化报告（含吞吐量/延迟/资源利用率对比）,5,SUB0316;SUB0317;SUB0318,5,CH03,1
+SUB0321,KP0305,时序数据特征提取规则,定义时间序列的采集频率、数据压缩策略及时间窗口划分逻辑,3,,5,CH03,4
+SUB0322,KP0305,时间分区与预聚合存储方案,设计按时间分区的Region划分策略（如按天分区）及预聚合计算逻辑,4,SUB0321,5,CH03,3
+SUB0323,KP0305,倒排索引加速多维查询,为时间戳和标签字段构建二级索引，支持多维度时间范围查询,4,SUB0322,5,CH03,2
+SUB0324,KP0305,冷热数据分层存储策略,基于TTL机制实现热数据存SSD、温数据存HDD、冷数据存对象存储,5,SUB0323,5,CH03,2
+SUB0325,KP0305,时间线压缩算法实现,开发基于Delta编码的时序数据压缩算法（压缩率 > 60%）,5,SUB0324,5,CH03,3
+SUB0401,KP0401,元数据存储引擎对比,对比Derby/MySQL作为Hive元数据库的部署差异与性能影响,1,,5,CH04,2
+SUB0402,KP0401,元数据版本控制机制,分析表结构变更（ALTER TABLE）的版本回滚实现逻辑,1,SUB0401,5,CH04,2
+SUB0403,KP0401,元数据权限管理模型,通过Sentry/Ranger实现库表级权限控制策略,2,SUB0402,5,CH04,4
+SUB0404,KP0401,元数据备份与恢复流程,设计自动化脚本备份元数据库并验证恢复完整性,2,SUB0403,5,CH04,1
+SUB0405,KP0401,元数据与外部系统集成,实现Hive元数据与Atlas数据目录的自动同步,3,SUB0404,5,CH04,3
+SUB0406,KP0402,HQL解析器工作原理,从SELECT语句到AST抽象语法树的转换过程解析,2,,5,CH04,1
+SUB0407,KP0402,Map阶段输入分片策略,分析Hive如何根据输入表大小生成Map任务数,2,SUB0406,5,CH04,1
+SUB0408,KP0402,Reduce阶段分组逻辑,解释GROUP BY操作如何映射到MapReduce的Shuffle阶段,3,SUB0407,5,CH04,4
+SUB0409,KP0402,JOIN操作执行计划可视化,通过EXPLAIN命令解析多表JOIN的MapReduce任务链,3,SUB0408,5,CH04,4
+SUB0410,KP0402,复杂查询优化规则,谓词下推、列剪枝等优化器规则对MapReduce任务的影响,4,SUB0409,5,CH04,3
+SUB0411,KP0403,分区粒度选择策略,根据数据量级选择按日/月分区或复合分区（如日期+地区）,3,,5,CH04,4
+SUB0412,KP0403,动态分区性能优化,调整hive.exec.dynamic.partition参数避免小文件过多,3,SUB0411,5,CH04,1
+SUB0413,KP0403,分桶数计算与数据倾斜预防,根据唯一键基数计算分桶数，避免Reduce阶段倾斜,4,SUB0412,5,CH04,1
+SUB0414,KP0403,分桶表与Sampling查询加速,通过TABLESAMPLE实现高效数据采样,4,SUB0413,5,CH04,1
+SUB0415,KP0403,分区与分桶联合优化方案,设计"分区+分桶"二级结构提升JOIN和聚合性能,5,SUB0414,5,CH04,2
+SUB0416,KP0404,并行执行参数调优,调整hive.exec.parallel和hive.exec.parallel.thread.num提升任务并发度,3,,5,CH04,2
+SUB0417,KP0404,JVM内存复用机制,配置hive.exec.parallel.thread.number与JVM重用策略降低启停开销,4,SUB0416,5,CH04,3
+SUB0418,KP0404,Map/Reduce堆内存优化,通过mapreduce.map.memory.mb和reduce参数避免OOM,4,SUB0417,5,CH04,2
+SUB0419,KP0404,中间结果压缩算法对比,测试Snappy/LZO在中间数据压缩率与CPU消耗的平衡点,5,SUB0418,5,CH04,3
+SUB0420,KP0404,执行引擎切换性能影响,对比MR/Tez/Spark引擎在相同查询下的资源消耗与响应时间,5,SUB0419,5,CH04,2
+SUB0421,KP0405,Spark Executor资源配置,根据数据量动态调整executor cores/memory参数,4,,5,CH04,3
+SUB0422,KP0405,DAG执行计划剪枝优化,通过Catalyst优化器消除冗余计算步骤,4,SUB0421,5,CH04,2
+SUB0423,KP0405,数据本地化策略调整,调整spark.locality.wait参数平衡数据本地化与调度延迟,5,SUB0422,5,CH04,2
+SUB0424,KP0405,动态分区插入性能瓶颈突破,开发自定义分区器解决小文件合并问题,5,SUB0423,5,CH04,1
+SUB0425,KP0405,自适应查询执行（AQE）实践,利用Spark 3.0 AQE特性自动优化Shuffle分区数,5,SUB0424,5,CH04,1
+SUB0501,KP0501,输入分片参数优化,调整?mapreduce.input.fileinputformat.split.minsize?控制Map任务数量,1,,3,CH05,4
+SUB0502,KP0501,Map任务内存分配策略,配置?mapreduce.map.memory.mb?避免OOM,1,SUB0501,3,CH05,4
+SUB0503,KP0501,Combiner预聚合参数实践,在Shuffle阶段启用Combiner减少网络传输量,2,SUB0502,3,CH05,4
+SUB0504,KP0501,输出压缩算法对比,测试Gzip/Snappy在最终输出的压缩率与CPU消耗平衡点,2,SUB0503,3,CH05,2
+SUB0505,KP0501,JVM重用参数调优,设置?mapreduce.job.jvm.numtasks?减少JVM启动开销,3,SUB0504,3,CH05,3
+SUB0506,KP0502,Map端环形缓冲区原理,分析?mapreduce.task.io.sort.mb?对溢写效率的影响,2,,3,CH05,3
+SUB0507,KP0502,分区排序规则实现,自定义Partitioner控制Reduce任务数据分布,2,SUB0506,3,CH05,2
+SUB0508,KP0502,溢写文件合并策略,调整?mapreduce.task.io.sort.factor?优化磁盘I/O,3,SUB0507,3,CH05,3
+SUB0509,KP0502,Fetch线程并发控制,配置?mapreduce.reduce.shuffle.parallelcopies?提升数据拉取速度,3,SUB0508,3,CH05,3
+SUB0510,KP0502,Shuffle内存监控方法论,通过JobHistory Server分析Shuffle阶段的GC日志,4,SUB0509,3,CH05,1
+SUB0511,KP0503,Map端Join实现方案,使用DistributedCache加载小表数据实现Broadcast Join,3,,3,CH05,4
+SUB0512,KP0503,Reduce端Join数据倾斜优化,通过Salt技术分散热点Key分布,3,SUB0511,3,CH05,2
+SUB0513,KP0503,Semi-Join过滤无效记录,在Map阶段预过滤不匹配的关联键,4,SUB0512,3,CH05,2
+SUB0514,KP0503,多路输入联合Join方案,设计MultipleInputs支持异构数据源关联,4,SUB0513,3,CH05,2
+SUB0515,KP0503,基于Bloom Filter的Join优化,利用布隆过滤器预判关联键存在性减少Shuffle数据量,5,SUB0514,3,CH05,1
+SUB0516,KP0504,倾斜Key检测工具开发,通过Counter统计各Key的数据分布,3,,3,CH05,3
+SUB0517,KP0504,热点Key二次分区策略,对倾斜Key增加随机前缀实现负载分散,4,SUB0516,3,CH05,3
+SUB0518,KP0504,Combiner局部聚合降倾斜,在Map阶段预聚合重复Key减少下游压力,4,SUB0517,3,CH05,1
+SUB0519,KP0504,动态调整Reduce任务数方案,根据输入数据量自动计算?mapreduce.job.reduces,5,SUB0518,3,CH05,2
+SUB0520,KP0504,倾斜场景下的Speculative执行,启用?mapreduce.reduce.speculative?缓解慢节点问题,5,SUB0519,3,CH05,3
+SUB0521,KP0505,队列资源配额动态分配方案,根据作业优先级调整YARN队列的?capacity?和?max-capacity,4,,3,CH05,1
+SUB0522,KP0505,基于标签的调度策略设计,通过Node Labels将任务调度到SSD或高CPU节点,5,SUB0521,3,CH05,3
+SUB0523,KP0505,抢占式资源回收机制,配置?yarn.scheduler.capacity.allow-preemption?保障高优先级作业,5,SUB0522,3,CH05,1
+SUB0524,KP0505,自定义ResourceManager插件,开发插件实现作业资源预测与弹性伸缩,5,SUB0523,3,CH05,2
+SUB0525,KP0505,混合负载场景下的调度优化,平衡批处理（MapReduce）与实时任务（Spark）的资源竞争,5,SUB0524,3,CH05,2
+SUB0601,KP0601,EXPLAIN 关键字解析,解读?EXPLAIN?输出中各阶段（STAGE DEPENDENCIES/PLAN）的含义,1,,3,CH06,4
+SUB0602,KP0601,抽象语法树生成逻辑,分析 Hive SQL 转换为 AST 的具体过程,1,SUB0601,3,CH06,1
+SUB0603,KP0601,逻辑执行计划优化规则,列举?LogicalOptimizer?中谓词下推、列裁剪等优化策略,2,SUB0602,3,CH06,1
+SUB0604,KP0601,物理执行计划映射关系,对比 MapReduce/Tez 引擎的?Physical Plan?差异,2,SUB0603,3,CH06,2
+SUB0605,KP0601,执行耗时瓶颈定位方法,通过?EXPLAIN ANALYZE?识别数据倾斜或资源不足问题,3,SUB0604,3,CH06,1
+SUB0606,KP0602,谓词下推适用场景分析,判断 WHERE 条件能否下推到存储层（ORC/Parquet）,2,,3,CH06,2
+SUB0607,KP0602,ORC 索引加速查询原理,利用?ROW GROUP INDEX?跳过无关数据块,2,SUB0606,3,CH06,4
+SUB0608,KP0602,列式存储统计信息应用,通过?stripe statistics?优化聚合查询性能,3,SUB0607,3,CH06,1
+SUB0609,KP0602,复杂谓词组合下推限制,分析?LIKE/IN?等操作符的下推兼容性问题,3,SUB0608,3,CH06,3
+SUB0610,KP0602,向量化查询执行优化,配置?hive.vectorized.execution.enabled?提升扫描效率,4,SUB0609,3,CH06,1
+SUB0611,KP0603,动态分区参数配置,设置?hive.exec.dynamic.partition.mode=nonstrict?启用动态分区,3,,3,CH06,3
+SUB0612,KP0603,分区字段顺序优化策略,避免高频字段在后导致的「小文件爆炸」问题,3,SUB0611,3,CH06,1
+SUB0613,KP0603,ZLIB 与 Snappy 压缩比测试,对比不同压缩算法在 TEXT/ORC 格式下的 CPU 与存储开销,4,SUB0612,3,CH06,2
+SUB0614,KP0603,中间结果压缩配置,优化?hive.intermediate.compression.codec?减少 Shuffle 数据量,4,SUB0613,3,CH06,2
+SUB0615,KP0603,压缩与分桶联合优化方案,结合?CLUSTERED BY?与压缩提升查询性能,5,SUB0614,3,CH06,2
+SUB0616,KP0604,DAG 执行模型对比分析,对比 Tez 的动态 DAG 与 MapReduce 的固定阶段模型差异,4,,3,CH06,3
+SUB0617,KP0604,容器复用性能测试,统计?hive.tez.container.reuse?对短作业的提速效果,4,SUB0616,3,CH06,3
+SUB0618,KP0604,内存资源占用监控方法,通过?Tez UI?分析 Task 内存峰值与 GC 耗时,4,SUB0617,3,CH06,3
+SUB0619,KP0604,复杂查询场景执行效率对比,在 10 表 Join 场景下测试 Tez 与 MR 的执行时间差异,5,SUB0618,3,CH06,3
+SUB0620,KP0604,失败任务重试机制对比,分析 Tez 的?speculative execution?与 MR 的容错策略优劣,5,SUB0619,3,CH06,3
+SUB0621,KP0605,LLAP 守护进程部署架构,设计混合部署模式（YARN 容器 + 独立进程）的资源分配方案,5,,3,CH06,3
+SUB0622,KP0605,热数据缓存策略设计,配置?hive.llap.io.cache.enabled?实现 SSD 缓存加速,5,SUB0621,3,CH06,1
+SUB0623,KP0605,并发查询队列优先级调度,通过?LLAP 资源管理器?平衡实时查询与批处理任务的资源争抢,5,SUB0622,3,CH06,3
+SUB0624,KP0605,向量化执行与 LLAP 集成优化,调整?hive.llap.vectorized.*?参数提升复杂查询性能,5,SUB0623,3,CH06,2
+SUB0625,KP0605,混合负载场景下的弹性伸缩方案,根据 CPU/内存负载动态调整 LLAP 守护进程数量,5,SUB0624,3,CH06,3
+SUB0701,KP0701,核心组件交互关系,解析 Driver/Executor/Cluster Manager 的通信机制与职责划分,1,,6,CH07,2
+SUB0702,KP0701,本地与集群模式差异,对比 Local 模式与 YARN/K8s 集群部署的运行时行为差异,1,SUB0701,6,CH07,4
+SUB0703,KP0701,执行器内存分配策略,配置?spark.executor.memory?与堆外内存参数优化技巧,2,SUB0702,6,CH07,1
+SUB0704,KP0701,任务调度线程模型,分析 DAGScheduler/TaskScheduler 的线程池管理与任务分发逻辑,2,SUB0703,6,CH07,4
+SUB0705,KP0701,容错机制与血统溯源,通过 RDD 血统（Lineage）实现 Stage 重试与数据恢复,3,SUB0704,6,CH07,3
+SUB0706,KP0702,窄依赖与宽依赖判定,通过 RDD 依赖图识别 Shuffle 边界与 Stage 划分依据,2,,6,CH07,4
+SUB0707,KP0702,Stage并行度优化策略,调整?spark.default.parallelism?避免任务粒度不均,2,SUB0706,6,CH07,3
+SUB0708,KP0702,任务本地化策略配置,设置?spark.locality.wait?平衡数据本地性与调度延迟,3,SUB0707,6,CH07,4
+SUB0709,KP0702,动态资源抢占与任务抢占,分析 FAIR 调度模式下资源动态分配对 DAG 执行的影响,3,SUB0708,6,CH07,4
+SUB0710,KP0702,任务失败重试逻辑,通过?spark.task.maxFailures?控制任务重试次数与黑名单机制,4,SUB0709,6,CH07,3
+SUB0711,KP0703,堆内外内存分配策略,配置?spark.memory.offHeap.enabled?优化大数据集处理性能,3,,6,CH07,4
+SUB0712,KP0703,统一内存管理比例调整,调整?spark.memory.fraction?平衡 Execution/Storage 内存占比,3,SUB0711,6,CH07,2
+SUB0713,KP0703,二进制数据编码优化,使用 Tungsten 编码器减少序列化开销与 GC 停顿,4,SUB0712,6,CH07,2
+SUB0714,KP0703,堆外内存溢出诊断方法,通过?UnsafeAlignedOffset?异常定位内存泄漏问题,4,SUB0713,6,CH07,1
+SUB0715,KP0703,自定义内存管理器实现,扩展?MemoryManager?实现自定义内存分配策略,5,SUB0714,6,CH07,3
+SUB0716,KP0704,Sort Shuffle 写流程解析,分析?BypassMergeSortShuffleWriter?与?SortShuffleWriter?适用场景,4,,6,CH07,1
+SUB0717,KP0704,Hash Shuffle 性能瓶颈测试,对比?spark.shuffle.manager=hash?在小文件场景下的磁盘 I/O 压力,4,SUB0716,6,CH07,3
+SUB0718,KP0704,索引文件优化机制,利用?spark.shuffle.sort.io.plugin.class?提升 Shuffle 文件索引效率,4,SUB0717,6,CH07,1
+SUB0719,KP0704,内存与磁盘混合排序策略,调整?spark.shuffle.spill.numElementsForceSpillThreshold?控制溢写阈值,5,SUB0718,6,CH07,3
+SUB0720,KP0704,Shuffle 压缩算法对比实验,测试 LZ4/Snappy 对 Shuffle 数据传输速率与 CPU 开销的影响,5,SUB0719,6,CH07,1
+SUB0721,KP0705,闲置 Executor 回收策略,配置?spark.dynamicAllocation.executorIdleTimeout?实现资源弹性回收,5,,6,CH07,1
+SUB0722,KP0705,按需扩展 Executor 数量,通过?spark.dynamicAllocation.maxExecutors?限制集群资源占用峰值,5,SUB0721,6,CH07,3
+SUB0723,KP0705,背压反馈与资源动态调整,集成?spark.streaming.backpressure.enabled?实现流式任务资源自适应,5,SUB0722,6,CH07,2
+SUB0724,KP0705,混合负载优先级调度方案,设计实时任务抢占批处理资源的优先级策略,5,SUB0723,6,CH07,1
+SUB0725,KP0705,跨集群资源共享调度框架,开发基于 YARN/K8s 的多 Spark 应用动态资源协调器,5,SUB0724,6,CH07,2
+SUB0801,KP0801,类型推断规则解析,解析Scala编译器的类型推导逻辑（如变量声明、函数返回值推导）,1,,5,CH08,1
+SUB0802,KP0801,隐式转换作用域优先级,分析隐式转换在不同作用域（局部/伴生对象/包对象）的优先级规则,1,SUB0801,5,CH08,1
+SUB0803,KP0801,隐式参数与上下文绑定,通过?implicit?关键字实现类型上下文自动注入,2,SUB0802,5,CH08,2
+SUB0804,KP0801,隐式类扩展方法设计,利用隐式类为现有类型添加新方法（如?String?增强操作）,2,SUB0803,5,CH08,4
+SUB0805,KP0801,类型推导与隐式转换调试技巧,使用?-Xprint:typer?编译选项追踪隐式转换过程,3,SUB0804,5,CH08,4
+SUB0806,KP0802,高阶函数类型签名解析,分析?map/filter/reduce?等函数的类型签名（如?List[A] ? (A ? B) ? List[B]）,2,,5,CH08,4
+SUB0807,KP0802,闭包与自由变量捕获机制,解释闭包如何捕获外部变量及其对内存管理的影响,2,SUB0806,5,CH08,4
+SUB0808,KP0802,柯里化函数部分应用场景,通过?curried?方法实现多参数函数分步调用（如配置参数预设）,3,SUB0807,5,CH08,3
+SUB0809,KP0802,函数组合与管道操作符,使用?andThen/compose?实现函数链式调用（如?f.compose(g)(x)）,3,SUB0808,5,CH08,1
+SUB0810,KP0802,高阶函数性能优化策略,对比匿名函数与具名函数在JVM层的性能差异（如Lambda内联优化）,4,SUB0809,5,CH08,2
+SUB0811,KP0803,集合类型继承体系分析,解析?Traversable/Iterable/Seq/List?的继承关系与特性差异,3,,5,CH08,2
+SUB0812,KP0803,惰性集合视图优化策略,使用?view?延迟计算链式操作，减少中间集合生成,3,SUB0811,5,CH08,3
+SUB0813,KP0803,并行集合任务分割机制,分析?par?方法如何将集合拆分为子任务并行处理,4,SUB0812,5,CH08,2
+SUB0814,KP0803,自定义Monad实现集合操作,扩展?flatMap?方法实现自定义集合操作（如错误处理Monad）,4,SUB0813,5,CH08,2
+SUB0815,KP0803,集合操作性能基准测试,对比?while循环/for推导/高阶函数?在百万级数据下的执行效率,5,SUB0814,5,CH08,2
+SUB0816,KP0804,模式匹配类型覆盖检测,使用?@unchecked?注解避免编译器警告（如非完全模式匹配场景）,4,,5,CH08,3
+SUB0817,KP0804,样例类深层嵌套解构技巧,"解构嵌套样例类结构（如?case A(B(x), C(y)) ? ...）",4,SUB0816,5,CH08,2
+SUB0818,KP0804,类型模式与类型擦除处理,处理JVM类型擦除对模式匹配的影响（如?case list: List[Int] ? ...）,4,SUB0817,5,CH08,3
+SUB0819,KP0804,自定义提取器设计原则,实现?unapply?方法定义非样例类的模式匹配逻辑,5,SUB0818,5,CH08,2
+SUB0820,KP0804,模式匹配性能优化方案,对比?if-else?与模式匹配在字节码层的执行效率差异,5,SUB0819,5,CH08,1
+SUB0821,KP0805,Actor消息传递语义实现,设计基于?tell/ask?的消息异步处理机制（至少一次/精确一次语义）,5,,5,CH08,2
+SUB0822,KP0805,容错监管策略配置,通过监管策略（Supervision Strategy）处理子Actor异常状态,5,SUB0821,5,CH08,3
+SUB0823,KP0805,分布式Actor路由设计,实现跨JVM节点的Actor路由机制（如Consistent Hashing路由）,5,SUB0822,5,CH08,3
+SUB0824,KP0805,死信队列监控与告警方案,配置死信监听器（Dead Letter Listener）实现系统异常监控,5,SUB0823,5,CH08,2
+SUB0825,KP0805,响应式流集成与背压控制,集成Akka Streams实现Actor间的背压控制（如Buffer容量动态调整）,5,SUB0824,5,CH08,1
+SUB0901,KP0901,逻辑计划解析阶段,解析SQL语句生成未优化的逻辑计划树（Unresolved Logical Plan）,1,,5,CH09,2
+SUB0902,KP0901,逻辑优化规则应用,应用常量折叠、谓词下推等规则优化逻辑计划,1,SUB0901,5,CH09,3
+SUB0903,KP0901,物理计划生成机制,将逻辑计划转换为物理计划（如选择Join算法：BroadcastHashJoin/SortMergeJoin）,2,SUB0902,5,CH09,1
+SUB0904,KP0901,优化规则动态扩展方法,通过RuleExecutor添加自定义优化规则（如重写Shuffle策略）,2,SUB0903,5,CH09,2
+SUB0905,KP0901,执行计划可视化工具,使用explain(true)输出带统计信息的执行计划,3,SUB0904,5,CH09,3
+SUB0906,KP0902,执行计划对比分析,对比相同操作的DataFrame（Catalyst优化）与RDD（手写代码）执行计划差异,2,,5,CH09,3
+SUB0907,KP0902,序列化方式性能影响,分析Java序列化与Tungsten二进制编码的内存占用差异,2,SUB0906,5,CH09,1
+SUB0908,KP0902,全阶段代码生成机制,解释WholeStageCodeGen如何消除虚函数调用提升性能,3,SUB0907,5,CH09,2
+SUB0909,KP0902,内存管理模型对比,对比RDD（JVM堆内存）与DataFrame（Tungsten Off-Heap）的内存管理效率,3,SUB0908,5,CH09,4
+SUB0910,KP0902,执行耗时基准测试,通过SparkBench对相同数据集执行聚合操作，对比两种API耗时,4,SUB0909,5,CH09,3
+SUB0911,KP0903,简单UDF注册与调用,实现字符串处理UDF并通过spark.udf.register注册,3,,5,CH09,1
+SUB0912,KP0903,复杂类型UDF参数处理,处理Struct/Array等复杂类型参数的序列化与反序列化,3,SUB0911,5,CH09,2
+SUB0913,KP0903,UDAF聚合缓冲区设计,实现UserDefinedAggregateFunction中的merge/update方法,4,SUB0912,5,CH09,1
+SUB0914,KP0903,注解式UDAF开发（Aggregator）,使用@typechecked注解开发类型安全的聚合函数,4,SUB0913,5,CH09,2
+SUB0915,KP0903,UDF性能优化技巧,通过代码生成或向量化计算提升UDF执行效率,5,SUB0914,5,CH09,1
+SUB0916,KP0904,Parquet列存编码原理,分析字典编码、RLE等压缩算法对存储效率的影响,4,,5,CH09,2
+SUB0917,KP0904,嵌套数据模式推断,从JSON文件推断嵌套结构（Struct/Array）并生成Schema,4,SUB0916,5,CH09,1
+SUB0918,KP0904,谓词下推与列裁剪优化,在Parquet中通过filter实现谓词下推减少IO,4,SUB0917,5,CH09,1
+SUB0919,KP0904,JSON解析性能调优,对比json4s与Spark原生JSON解析器的吞吐量差异,5,SUB0918,5,CH09,3
+SUB0920,KP0904,自定义数据源开发,实现DataSourceV2接口扩展自定义文件格式读写,5,SUB0919,5,CH09,3
+SUB0921,KP0905,联邦查询执行计划生成,整合Hive表与JDBC数据源的逻辑计划生成策略,5,,5,CH09,3
+SUB0922,KP0905,谓词跨数据源下推规则,将过滤条件下推至不同数据源（如HBase Filter与MySQL WHERE条件协同）,5,SUB0921,5,CH09,2
+SUB0923,KP0905,数据缓存与广播优化,动态缓存高频访问的外部数据源分区至Spark内存,5,SUB0922,5,CH09,3
+SUB0924,KP0905,异构数据源JOIN算法优化,设计基于布隆过滤器的跨数据源JOIN近似优化算法,5,SUB0923,5,CH09,3
+SUB0925,KP0905,查询联邦容错机制,实现数据源故障转移与重试策略（如自动切换MySQL从库）,5,SUB0924,5,CH09,1
+SUB1001,KP1001,微批次时间窗口划分,解析Spark Streaming中batchInterval参数对数据切分粒度的影响,1,,5,CH10,1
+SUB1002,KP1001,DStream抽象模型,分析DStream的RDD依赖链与容错机制,1,SUB1001,5,CH10,3
+SUB1003,KP1001,接收器动态分区策略,对比Kafka Direct API与Receiver模式的线程模型差异,2,SUB1002,5,CH10,2
+SUB1004,KP1001,批次调度与任务提交,追踪JobGenerator生成Job的源码流程,2,SUB1003,5,CH10,4
+SUB1005,KP1001,处理延迟监控指标,通过StreamingListener获取批次处理延迟统计,3,SUB1004,5,CH10,3
+SUB1006,KP1002,滑动窗口重叠数据管理,计算windowDuration与slideDuration不同比例时的数据复用率,2,,5,CH10,1
+SUB1007,KP1002,状态存储后端对比,对比HDFSBackedStateStore与RocksDBStateStore的读写性能差异,2,SUB1006,5,CH10,1
+SUB1008,KP1002,状态过期(TTL)机制,配置mapWithState中状态过期策略与自动清理逻辑,3,SUB1007,5,CH10,3
+SUB1009,KP1002,状态快照恢复一致性,分析checkpoint目录中snapshot文件的恢复边界条件,3,SUB1008,5,CH10,1
+SUB1010,KP1002,窗口聚合内存溢出诊断,定位reduceByKeyAndWindow中OOM问题的成因与优化方案,4,SUB1009,5,CH10,3
+SUB1011,KP1003,Checkpoint目录结构解析,解析metadata和offsets目录中存储的元数据类型,3,,5,CH10,1
+SUB1012,KP1003,驱动程序故障恢复流程,通过StreamingContext.getOrCreate实现重启恢复逻辑,3,SUB1011,5,CH10,1
+SUB1013,KP1003,接收器数据预写日志(WAL),配置Kafka Direct API的enable.auto.commit与WAL同步策略,4,SUB1012,5,CH10,3
+SUB1014,KP1003,状态存储检查点压缩,使用Snappy压缩算法降低checkpoint文件体积,4,SUB1013,5,CH10,2
+SUB1015,KP1003,容错恢复端到端测试方案,设计模拟Worker节点宕机的自动化测试用例,5,SUB1014,5,CH10,2
+SUB1016,KP1004,反压信号传递机制,分析spark.streaming.backpressure.enabled的PID控制器实现,4,,5,CH10,3
+SUB1017,KP1004,动态最大消费速率调整,追踪rateController根据处理延迟动态调整maxRatePerPartition的算法,4,SUB1016,5,CH10,3
+SUB1018,KP1004,倾斜分区检测与再平衡,通过spark.streaming.kafka.maxRatePerPartition实现消费负载均衡,5,SUB1017,5,CH10,2
+SUB1019,KP1004,反压与资源调度联动,关联动态资源分配(spark.dynamicAllocation.enabled)与反压机制触发条件,5,SUB1018,5,CH10,2
+SUB1020,KP1004,背压失效场景诊断,定位网络瓶颈或序列化阻塞导致的背压机制失效案例,5,SUB1019,5,CH10,2

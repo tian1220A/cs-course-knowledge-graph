@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 800px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 11, "label": "Hadoop\u67b6\u6784\u6f14\u8fdb\u4e0e\u6838\u5fc3\u7ec4\u4ef6", "shape": "dot", "size": 10.047978212708156, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 11"}, {"color": "#45B7D1", "font": {"color": "#333333"}, "id": 64, "label": "\u751f\u6001\u5de5\u5177\u5168\u666f\u56fe", "shape": "triangle", "size": 10.01992, "title": "\u7c7b\u578b: SubKnowledgePoint\nPageRank: 0.00\nID: 64"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 0, "label": "\u5927\u6570\u636e\u5904\u7406\u67b6\u6784Hadoop", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 0"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 1, "label": "Hadoop\u6587\u4ef6\u7cfb\u7edfHDFS", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 1"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 2, "label": "YARN\u8d44\u6e90\u8c03\u5ea6\u6846\u67b6", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 2"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 3, "label": "MapReduce\u7f16\u7a0b\u6a21\u578b", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 3"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 4, "label": "Hive\u6570\u636e\u4ed3\u5e93\u6280\u672f", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 4"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 5, "label": "HBase\u5206\u5e03\u5f0f\u6570\u636e\u5e93", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 5"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 6, "label": "Spark\u6838\u5fc3\u67b6\u6784", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 6"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 7, "label": "RDD\u7f16\u7a0b\u57fa\u7840", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 7"}, {"color": "#FF6B6B", "font": {"color": "#333333"}, "id": 8, "label": "Spark SQL\u4e0eDataFrame", "shape": "star", "size": 12.0, "title": "\u7c7b\u578b: Chapter\nPageRank: 0.10\nID: 8"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 59, "label": "\u80cc\u538b\u63a7\u5236\u4e0e\u52a8\u6001\u8d1f\u8f7d\u5747\u8861", "shape": "dot", "size": 10.141332119189572, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 59"}, {"color": "#45B7D1", "font": {"color": "#333333"}, "id": 629, "label": "\u80cc\u538b\u5931\u6548\u573a\u666f\u8bca\u65ad", "shape": "triangle", "size": 10.23424, "title": "\u7c7b\u578b: SubKnowledgePoint\nPageRank: 0.01\nID: 629"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 15, "label": "Hadoop\u751f\u6001\u5de5\u5177\u94fe\u5bf9\u6bd4", "shape": "dot", "size": 10.15790820306593, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 15"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 14, "label": "YARN\u8d44\u6e90\u7ba1\u7406\u673a\u5236", "shape": "dot", "size": 10.077182470335002, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 14"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 13, "label": "MapReduce\u7f16\u7a0b\u6a21\u578b", "shape": "dot", "size": 10.061201913457559, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 13"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 12, "label": "HDFS\u6587\u4ef6\u7cfb\u7edf\u6838\u5fc3\u539f\u7406", "shape": "dot", "size": 10.0531761710256, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 12"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 20, "label": "HDFS\u4e0e\u4e91\u5b58\u50a8\u96c6\u6210\u5b9e\u8df5", "shape": "dot", "size": 10.088271214915615, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 20"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 18, "label": "\u6570\u636e\u5197\u4f59\u4e0e\u5bb9\u9519\u673a\u5236", "shape": "dot", "size": 10.055349449084273, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 18"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 17, "label": "NameNode\u9ad8\u53ef\u7528\u5b9e\u73b0\u65b9\u6848", "shape": "dot", "size": 10.03901364580144, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 17"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 16, "label": "HDFS\u8bfb\u5199\u6d41\u7a0b\u4e0e\u6570\u636e\u5206\u5757\u7b56\u7565", "shape": "dot", "size": 10.03232189520023, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 16"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 19, "label": "HDFS\u8054\u90a6\u67b6\u6784\u8bbe\u8ba1", "shape": "dot", "size": 10.027173580037012, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 19"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 25, "label": "\u65f6\u5e8f\u6570\u636e\u573a\u666f\u4e0b\u7684HBase\u4f18\u5316", "shape": "dot", "size": 10.199464415643046, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 25"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 24, "label": "HBase\u4e0eRDBMS\u6027\u80fd\u5bf9\u6bd4\u5206\u6790", "shape": "dot", "size": 10.058051794036052, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 24"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 23, "label": "\u4e8c\u7ea7\u7d22\u5f15\u5b9e\u73b0\u65b9\u6848\u5bf9\u6bd4", "shape": "dot", "size": 10.0422849247006, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 23"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 22, "label": "Region\u5206\u88c2\u4e0e\u8d1f\u8f7d\u5747\u8861\u7b56\u7565", "shape": "dot", "size": 10.035353164101167, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 22"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 21, "label": "HBase\u6570\u636e\u6a21\u578b\u4e0e\u5b58\u50a8\u7ed3\u6784", "shape": "dot", "size": 10.031247964600588, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 21"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 30, "label": "Hive on Spark\u6267\u884c\u5f15\u64ce\u4f18\u5316", "shape": "dot", "size": 10.183181638369735, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 30"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 29, "label": "Hive\u6027\u80fd\u8c03\u4f18\u53c2\u6570\u5206\u6790", "shape": "dot", "size": 10.058802236505427, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 29"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 28, "label": "\u5206\u533a\u8868\u4e0e\u5206\u6876\u8868\u8bbe\u8ba1\u539f\u5219", "shape": "dot", "size": 10.042318174703011, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 28"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 27, "label": "HQL\u4e0eMapReduce\u4efb\u52a1\u6620\u5c04\u5173\u7cfb", "shape": "dot", "size": 10.035383542585157, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 27"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 26, "label": "Hive\u5143\u6570\u636e\u7ba1\u7406\u673a\u5236", "shape": "dot", "size": 10.031276170414559, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 26"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 35, "label": "MapReduce\u4e0eYARN\u8d44\u6e90\u8c03\u5ea6\u96c6\u6210", "shape": "dot", "size": 10.164468768295414, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 35"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 34, "label": "\u6570\u636e\u503e\u659c\u95ee\u9898\u8bca\u65ad\u4e0e\u4f18\u5316", "shape": "dot", "size": 10.058806187914465, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 34"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 33, "label": "\u591a\u8868Join\u64cd\u4f5c\u5b9e\u73b0\u65b9\u6848", "shape": "dot", "size": 10.042321636473009, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 33"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 32, "label": "Shuffle\u9636\u6bb5\u5de5\u4f5c\u673a\u5236", "shape": "dot", "size": 10.035386703667443, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 32"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 31, "label": "MapReduce\u6027\u80fd\u8c03\u4f18\u53c2\u6570", "shape": "dot", "size": 10.031279105015091, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 31"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 40, "label": "Hive LLAP\u5b9e\u65f6\u67e5\u8be2\u4f18\u5316\u65b9\u6848", "shape": "dot", "size": 10.148986720522599, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 40"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 39, "label": "Tez\u5f15\u64ce\u4e0eMapReduce\u6027\u80fd\u5bf9\u6bd4", "shape": "dot", "size": 10.058575284838122, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 39"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 38, "label": "\u52a8\u6001\u5206\u533a\u4e0e\u538b\u7f29\u6280\u672f\u5b9e\u8df5", "shape": "dot", "size": 10.042321990467817, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 38"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 37, "label": "\u8c13\u8bcd\u4e0b\u63a8\u4e0e\u5217\u5f0f\u5b58\u50a8\u4f18\u5316", "shape": "dot", "size": 10.03538702623669, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 37"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 36, "label": "Hive\u6267\u884c\u8ba1\u5212\u89e3\u6790\u65b9\u6cd5", "shape": "dot", "size": 10.031279404317598, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 36"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 45, "label": "\u52a8\u6001\u8d44\u6e90\u5206\u914d\u7b56\u7565\u5b9e\u73b0", "shape": "dot", "size": 10.148986776202378, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 45"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 44, "label": "Shuffle\u5bf9\u6bd4\uff08Sort vs Hash\uff09", "shape": "dot", "size": 10.058575327791546, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 44"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 43, "label": "\u5185\u5b58\u7ba1\u7406\u6a21\u578b\uff08Tungsten\uff09", "shape": "dot", "size": 10.042322027787389, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 43"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 42, "label": "DAG\u8c03\u5ea6\u4e0e\u4efb\u52a1\u5212\u5206\u673a\u5236", "shape": "dot", "size": 10.035387060065476, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 42"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 41, "label": "Spark\u8fd0\u884c\u65f6\u67b6\u6784\u7ec4\u4ef6", "shape": "dot", "size": 10.031279435570866, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 41"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 50, "label": "\u5e76\u53d1\u7f16\u7a0b\uff08Actor\u6a21\u578b\uff09", "shape": "dot", "size": 10.152716441297224, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 50"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 48, "label": "\u96c6\u5408\u64cd\u4f5c\uff08map/filter/reduce\uff09", "shape": "dot", "size": 10.044503859857107, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 48"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 47, "label": "\u9ad8\u9636\u51fd\u6570\u4e0e\u67ef\u91cc\u5316\u7279\u6027", "shape": "dot", "size": 10.036227110563056, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 47"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 46, "label": "Scala\u7c7b\u578b\u63a8\u65ad\u4e0e\u9690\u5f0f\u8f6c\u6362", "shape": "dot", "size": 10.030035745574233, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 46"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 49, "label": "\u6a21\u5f0f\u5339\u914d\u4e0e\u6837\u4f8b\u7c7b\u8bbe\u8ba1", "shape": "dot", "size": 10.029122320499168, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 49"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 55, "label": "\u8de8\u6570\u636e\u6e90\u8054\u5408\u67e5\u8be2\u4f18\u5316", "shape": "dot", "size": 10.128717733929022, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.01\nID: 55"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 54, "label": "\u6570\u636e\u6e90\u6269\u5c55\uff08Parquet/JSON\uff09", "shape": "dot", "size": 10.07021832714047, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 54"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 53, "label": "UDF/UDAF\u5f00\u53d1\u5b9e\u8df5", "shape": "dot", "size": 10.054935832719643, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 53"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 52, "label": "DataFrame\u4e0eRDD\u6027\u80fd\u5dee\u5f02", "shape": "dot", "size": 10.047438954283725, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 52"}, {"color": "#4ECDC4", "font": {"color": "#333333"}, "id": 51, "label": "Catalyst\u4f18\u5316\u5668\u6267\u884c\u6d41\u7a0b", "shape": "dot", "size": 10.042647378000858, "title": "\u7c7b\u578b: KnowledgePoint\nPageRank: 0.00\nID: 51"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "#FF0000", "from": 11, "title": "\u5b66\u4e60\u6b65\u9aa4 1", "to": 64, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 64, "title": "\u5b66\u4e60\u6b65\u9aa4 2", "to": 0, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 0, "title": "\u5b66\u4e60\u6b65\u9aa4 3", "to": 1, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 1, "title": "\u5b66\u4e60\u6b65\u9aa4 4", "to": 2, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 2, "title": "\u5b66\u4e60\u6b65\u9aa4 5", "to": 3, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 3, "title": "\u5b66\u4e60\u6b65\u9aa4 6", "to": 4, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 4, "title": "\u5b66\u4e60\u6b65\u9aa4 7", "to": 5, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 5, "title": "\u5b66\u4e60\u6b65\u9aa4 8", "to": 6, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 6, "title": "\u5b66\u4e60\u6b65\u9aa4 9", "to": 7, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 7, "title": "\u5b66\u4e60\u6b65\u9aa4 10", "to": 8, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 8, "title": "\u5b66\u4e60\u6b65\u9aa4 11", "to": 59, "width": 2}, {"arrows": "to", "color": "#FF0000", "from": 59, "title": "\u5b66\u4e60\u6b65\u9aa4 12", "to": 629, "width": 2}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 0, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 15}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 0, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 14}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 0, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 13}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 0, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 12}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 0, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 11}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 1, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 20}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 1, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 18}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 1, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 17}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 1, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 16}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 1, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 19}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 2, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 25}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 2, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 24}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 2, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 23}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 2, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 22}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 2, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 21}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 3, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 30}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 3, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 29}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 3, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 28}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 3, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 27}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 3, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 26}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 4, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 35}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 4, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 34}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 4, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 33}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 4, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 32}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 4, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 31}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 5, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 40}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 5, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 39}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 5, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 38}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 5, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 37}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 5, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 36}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 6, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 45}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 6, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 44}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 6, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 43}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 6, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 42}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 6, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 41}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 7, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 50}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 7, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 48}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 7, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 47}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 7, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 46}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 7, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 49}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 8, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 55}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 8, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 54}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 8, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 53}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 8, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 52}, {"arrows": "to", "color": "#00FF00", "dashes": true, "from": 8, "title": "\u63a8\u8350\u77e5\u8bc6\u70b9", "to": 51}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  network = new vis.Network(container, data, options);
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

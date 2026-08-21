@@ -1,0 +1,21 @@
+lab_id,lab_name,chapter_id,equipment,difficulty,hours,related_kp
+LAB0101,Hadoop集群环境搭建,CH01,Hadoop 3.3.1集群,基础,2,KP0101;KP0102
+LAB0102,Hadoop分布式文件读写验证,CH01,HDFS Shell,进阶,3,KP0103
+LAB0201,HDFS多节点文件备份实验,CH02,HDFS WebUI,基础,2,KP0201;KP0202
+LAB0202,HDFS高可用性故障模拟,CH02,ZooKeeper 3.7,综合性,4,KP0203;KP0204
+LAB0301,MapReduce词频统计,CH03,Hadoop Streaming,基础,2,KP0301
+LAB0302,分布式排序算法实现,CH03,Java SDK 11,进阶,3,KP0302;KP0303
+LAB0401,HBase表结构设计与CRUD操作,CH04,HBase 2.4,基础,2,KP0401
+LAB0402,HBase与Hive集成查询,CH04,Hive 3.1; HBase Shell,综合性,4,KP0402;KP0403
+LAB0501,Hive表分区与动态加载,CH05,Hive CLI,基础,2,KP0501
+LAB0502,跨数据库联合查询优化,CH05,Hive; MySQL 8.0,综合性,4,KP0502;KP0503
+LAB0601,Spark本地模式WordCount,CH06,Spark 3.2,基础,2,KP0601
+LAB0602,RDD依赖关系可视化,CH06,Spark UI,进阶,3,KP0602;KP0603
+LAB0701,DataFrame数据清洗实战,CH07,Spark SQL,基础,2,KP0701
+LAB0702,多数据源联合分析,CH07,Parquet; JSON,综合性,4,KP0702;KP0703
+LAB0801,实时日志流量统计,CH08,Kafka 2.8; Spark,进阶,3,KP0801;KP0802
+LAB0802,滑动窗口聚合实验,CH08,Netcat; Spark Streaming,综合性,4,KP0803
+LAB0901,鸢尾花分类模型训练,CH09,Spark MLlib,基础,2,KP0901
+LAB0902,模型性能分布式调优,CH09,Spark MLlib; Hyperopt,进阶,3,KP0902;KP0903
+LAB1001,电商用户行为分析系统,CH10,Hadoop; Hive; Spark,综合性,6,KP1001;KP1002
+LAB1002,实时舆情监控平台,CH10,Spark Streaming; Kafka,综合性,6,KP1003;KP1004
